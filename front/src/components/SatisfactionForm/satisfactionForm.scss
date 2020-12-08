@@ -1,0 +1,276 @@
+@import 'src/styles/vars';
+//position absolute mixin
+@mixin position-absolute ($top: null, $left: null, $right: null, $bottom: null) {
+  position: absolute;
+  top: $top;
+  left: $left;
+  right: $right;
+  bottom: $bottom;
+}
+
+//transitions mixin
+@mixin transition-mix($property: all, $duration: 0.2s, $timing: linear, $delay: 0s) {
+  transition-property: $property;
+  transition-duration: $duration;
+  transition-timing-function: $timing;
+  transition-delay: $delay;
+}
+
+.satisfaction {
+  margin-top: 3rem;
+  
+  .satisfaction-title {
+    text-align: center;
+    font-family: $patrick-font;
+    font-weight: 600;
+    font-size: 1.2rem;
+    padding-bottom: 1rem;
+  }
+
+  .satisfaction-form {
+    padding-left: 1rem;
+    text-align: center;
+    position: relative;
+
+    .needed-content {
+      color: red;
+      text-align: center;
+    }
+
+    .needed {
+      color: red;
+      display: inline-block;
+    }
+  }
+
+  .satisfaction-input {
+    position: absolute;
+    left: -9999px;
+  }
+
+  .satisfaction-label {
+    position: relative;
+  }
+
+  .satisfaction-img {
+    width: 18%;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  .question {
+    margin-bottom: 1rem;
+    margin-top:2rem;
+  }
+
+  .satisfaction-checked {
+    position: absolute;
+    bottom: -95%;
+    right: 25%;
+    background-color: #21bf73;
+    border-radius: 50%;
+    padding: 0.5rem;
+    display: none;
+    z-index: 3;
+
+    &:after {
+      content: '\f00c';
+      font-family: 'FontAwesome';
+      color: #fff;
+      font-size: 1rem;
+    }
+  }
+
+  .satisfaction-input:checked ~ .satisfaction-checked {
+    display: block;
+  }
+
+  .satisfaction-comment textarea {
+    width: 80%;
+    height: 100px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    font-size: 1rem;
+    font-family: $dosis-font;
+  }
+
+  .satisfaction-comment textarea::placeholder {
+    font-family: $dosis-font;
+    padding: 0.2rem;
+  }
+
+  .pertinence-container {
+    .pertinence-input-wrapper {
+      margin: 1rem 0;
+      position: relative;
+
+      .pertinence-input:not(:checked),
+      .pertinence-input:checked{
+        // Move radio input out of screen
+        position: absolute;
+        left: -9999px;
+        opacity: 0;
+      }
+      
+      .pertinence-input:checked ~ .pertinence-label {
+        color: #4a69bb;
+      }
+
+      // Custom checkbox
+      .pertinence-input:not(:checked) + .pertinence-label:after,
+      .pertinence-input:checked + .pertinence-label:after {
+        content: "";
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border: 2px solid #5a5a5a;;
+        box-sizing: border-box;
+        border-radius: 50%;
+        margin-left: 20px;
+        @include transition-mix($delay: 0.2s);
+      }
+
+      // Icon inside checkbox
+      .pertinence-input:not(:checked) + .pertinence-label:before,
+      .pertinence-input:checked + .pertinence-label:before {
+        content: "\f00c";
+        font: {
+          family: fontawesome;
+          size: 22px;
+        }
+        @include position-absolute($right: 40%, $top: -10%);
+        @include transition-mix;
+        transform-origin: center center;
+        color: #4a69bb;
+        opacity: 0;
+      }     
+
+      .pertinence-input:not(:checked) + .pertinence-label:before {
+        transform: scale(0);
+      }
+      
+      .pertinence-input:checked + .pertinence-label:after {
+        transform: scale(0);
+        opacity: 0;
+        @include transition-mix;
+      }
+      
+      .pertinence-input:checked + .pertinence-label:before {
+        transform: scale(1);
+        opacity: 1;
+        @include transition-mix($delay: 0.2s, $timing: cubic-bezier(0.57, 1.9, 0, 1.52));
+      }  
+
+    }
+  }
+
+  .satisfaction-btn-validate {
+    display: inline-block;
+    border: none;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    width: 50%;
+    margin-top: 2rem;
+    border-radius: 1rem;
+    font-family: $patrick-font;
+  }
+}
+
+
+@media screen and (min-width: 768px) {
+  .satisfaction {
+    min-height: 70vh;
+
+    .satisfaction-title {
+      font-size: 1.5rem;
+    }
+
+    .satisfaction-checked {
+      bottom: -60%;
+      right: 35%;
+
+      &:after {
+        font-size: 1.5rem;
+      }
+    }
+
+    .satisfaction-comment textarea {
+      font-family: $dosis-font;
+      width: 80%;
+      height: 150px;
+      margin-bottom: 1rem;
+    }
+
+    .question {
+      font-size: 1.3rem;
+      margin-top: 1.5rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .pertinence-container .pertinence-input-wrapper {
+      .pertinence-input:not(:checked) + .pertinence-label:before,
+      .pertinence-input:checked + .pertinence-label:before {
+        @include position-absolute($right: 45%, $top: -10%);
+        @include transition-mix;
+      }   
+    }
+
+    .satisfaction-btn-validate {
+      width: 30%;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .satisfaction {
+    min-height: 80vh;
+
+    .satisfaction-img {
+      width: 10%;
+    }
+    
+    .satisfaction-comment textarea {
+      width: 50%
+    }
+
+    .pertinence-container .pertinence-input-wrapper {
+      .pertinence-input:not(:checked) + .pertinence-label:before,
+      .pertinence-input:checked + .pertinence-label:before {
+        @include position-absolute($right: 46.75%, $top: -10%);
+        @include transition-mix;
+      }   
+    }
+
+    .satisfaction-btn-validate {
+      width: 15%;
+    }
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .satisfaction {
+
+    .pertinence-container .pertinence-input-wrapper {
+      .pertinence-input:not(:checked) + .pertinence-label:before,
+      .pertinence-input:checked + .pertinence-label:before {
+        @include position-absolute($right: 47.75%, $top: -10%);
+        @include transition-mix;
+      }   
+    }
+  }
+}
+
+@media screen and (min-width: 2000px) {
+  .satisfaction {
+  
+    .pertinence-container .pertinence-input-wrapper {
+      .pertinence-input:not(:checked) + .pertinence-label:before,
+      .pertinence-input:checked + .pertinence-label:before {
+        @include position-absolute($right: 48.75%, $top: -10%);
+        @include transition-mix;
+      }   
+    }
+  }
+}

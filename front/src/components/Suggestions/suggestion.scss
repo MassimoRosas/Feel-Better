@@ -1,0 +1,447 @@
+@import 'src/styles/vars';
+
+//position absolute mixin
+@mixin position-absolute ($top: null, $left: null, $right: null, $bottom: null) {
+  position: absolute;
+  top: $top;
+  left: $left;
+  right: $right;
+  bottom: $bottom;
+}
+
+//transitions mixin
+@mixin transition-mix($property: all, $duration: 0.2s, $timing: linear, $delay: 0s) {
+  transition-property: $property;
+  transition-duration: $duration;
+  transition-timing-function: $timing;
+  transition-delay: $delay;
+}
+.suggestions-empty {
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 1rem;
+  min-height: 75vh;
+  line-height: 2.2rem;
+
+
+  .redirect-mood-link {
+    padding: 0.3rem;
+    transition: background 0.5s cubic-bezier(.33,.66,.66,1);
+
+    &:hover {
+      color: $light-main-color;
+    }
+  }
+
+  .people-img {
+    display: block;
+    margin-top: 2rem;
+    width: 100%;
+  }
+}
+
+.suggestions {
+  width: 100%;
+  min-height: 75vh;
+  text-align: center;
+  line-height: 2rem;
+  padding: 1rem;
+
+  .suggestions-title {
+    font-size: 2rem;
+    line-height: 2.3rem;
+    font-family: $patrick-font;
+  }
+
+  // One suggestion style
+  .suggestion-container {
+    background: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+    margin: 10rem auto;
+    border-radius: $border-radius;
+    width: 85%;
+    height: 380px;
+    position: relative;
+    box-shadow: 0px 0px 19px -3px rgba(0,0,0,0.52);
+
+    // Form
+    .suggestion-form {
+      position: absolute;
+      top: -40%;
+      padding: 2rem 0.5rem;
+      font-size: 1.2rem;
+
+
+      .choose-suggestion-input {
+        // Hide checkbox
+        position: absolute;
+        left: -9999px;
+        opacity: 0;
+      }
+
+      // Custom checkbox
+      .choose-suggestion-input:not(:checked) + span:after,
+      .choose-suggestion-input:checked + span:after {
+        content: "";
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        // border: 2px solid #5a5a5a;
+        box-sizing: border-box;
+        border-radius: 50%;
+        margin-left: 20px;
+        @include transition-mix($delay: 0.2s);
+      }
+
+      // Icon inside checkbox
+      .choose-suggestion-input:not(:checked) + span:before,
+     .choose-suggestion-input:checked + span:before {
+        content: "\f00c";
+        font: {
+          family: fontawesome;
+          size: 22px;
+        }
+        display: flex;
+        height: 100%;
+        align-items:center;
+        @include position-absolute($right: 2px, $top: 0);
+        // color: $light-default-color;
+        @include transition-mix;
+        transform-origin: center center;
+        opacity: 0;
+      }     
+     .choose-suggestion-input:not(:checked) + span:before {
+        transform: scale(0);
+      }
+      
+     .choose-suggestion-input:checked + span:after {
+        transform: scale(0);
+        opacity: 0;
+        @include transition-mix;
+      }
+      
+     .choose-suggestion-input:checked + span:before {
+        transform: scale(1);
+        opacity: 1;
+        @include transition-mix($delay: 0.2s, $timing: cubic-bezier(0.57, 1.9, 0, 1.52));
+      }    
+
+      .choose-suggestion-btn {
+        font-family: $dosis-font;
+        font-weight: 600;
+        position: absolute;
+        bottom: -30%;
+        left: 15%;
+        text-transform: uppercase;
+        padding: 1rem;
+        border-radius: $border-radius;
+        border: none;
+        transform: scale(0);
+        transition: all 0.2s ease-in;
+
+
+        &:hover {
+          // background: $light-default-color;
+          letter-spacing: 1px;
+          -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+          -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+          box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
+          transition: all 0.4s ease 0s;
+        }
+      }
+
+      .choose-suggestion-input:checked ~ .choose-suggestion-btn {
+        transform: scale(1);
+      }
+    }
+
+
+    .suggestion-picture {
+      // background: linear-gradient(to top, $fourth-dot, $light-default-color, $second-dot);
+      border-radius: 50%;
+      border: 12px solid #fff;
+      width: 155px;
+      height: 155px;
+      position: absolute;
+      top: -10%;
+      right: -6%;
+      overflow: hidden;
+
+      box-shadow: 8px 8px 10px -3px rgba(0,0,0,0.52);
+
+       & > img {
+        // Icon size and position
+        width: 110px;
+        height: 110px;
+        position: absolute;
+        top: 6%;
+        right: 8%;
+      } 
+    }
+
+    .suggestion-budget {
+      width: fit-content;
+      padding: 2rem 1.5rem;
+      position: relative;
+      color: #202040;
+
+      & > p {
+        margin-bottom: 1rem;
+      }
+
+      .budget-tooltip {
+        //Tooltip text container
+        &::before {
+          position: absolute;
+          top: -25%;
+          left: 25%;
+          background-color: #2B222A;
+          border-radius: $border-radius;
+          color: #fff;
+          content: attr(aria-label); //This pulls in the text from the element with the tooltip
+          padding: 1rem;
+          transition: all 0.5s ease;
+          width: fit-content;
+        }
+
+        //Tooltip arrow
+        &::after {
+          position: absolute;
+          top: 14%;
+          left: 55%;
+          border-left: 10px solid transparent;
+          border-right: 10px solid transparent;
+          border-top: 10px solid #2B222A;
+          content: " ";
+          font-size: 0;
+          line-height: 0;
+          margin-left: -0.3rem;
+          width: 0;
+        }
+
+        //Setting up the transition
+        &::before,
+        &::after {
+          color: #efefef;
+          font-size: 1rem;
+          opacity: 0;
+          pointer-events: none;
+          text-align: center;
+        }
+      }
+
+
+      &:hover {
+        .budget-tooltip {
+          //Triggering the transition
+          &:before, &:after {
+            opacity: 1;
+            transition: all 0.75s ease;
+          }
+        } 
+      }
+
+    }
+
+    .suggestion-categories {
+      text-align: center;
+      width: 100%;
+      margin: 1rem 0;
+
+      .category-name {
+        display: inline-block;
+        color: $light-main-color;
+        border-radius: $border-radius;
+        margin: 0.5rem 0.25rem;
+        padding: 0.5rem;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.27) inset;
+        text-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+      }
+      
+    }
+
+    .suggestion-name {
+      padding: 1rem;
+      position: absolute;
+      bottom: 5%;
+      left: -5%;
+      border-radius: 4px;
+      color: #fff;
+      width: 110%;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.27);
+      text-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+      margin-right: 1rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      // background: linear-gradient(to top, $fourth-dot, $light-default-color, $second-dot);
+
+      .suggestion-search {
+        background: transparent;
+        outline: none;
+        border: none;
+        font-size: 2rem;
+        color: #fff;
+        position: absolute;
+        bottom: 5%;
+        right: 5%;
+
+        &:after {
+          content: '\f059';
+          font-family: 'FontAwesome';
+          font-size: 2.5rem;
+        }
+      }
+
+    }
+  }
+}
+
+@media screen and (min-width: 460px) {
+  .suggestion-container {
+    .suggestion-budget {
+      display: flex;
+      align-items: center;
+      margin-left: 3rem;
+      width: 70%;
+      font-size: 1.2rem;
+
+      & > p {
+        margin: 1rem 2rem 0 0;
+      }
+
+      & > svg {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    .category-name {
+      font-size: 1.5rem;
+    }
+    
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .suggestions-empty { 
+
+    .people-img {
+      width: 60%;
+      margin: 3rem auto 0;
+    }
+  }
+
+  .suggestions {
+    font-size: 1.5rem;
+    min-height: 90vh;
+
+    .suggestion-success {
+      position: inherit;
+      margin: 1rem auto 2rem;
+    }
+    
+    .suggestions-title {
+      margin-bottom: 10rem;
+    }
+
+    .suggestions-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      .suggestion-container {
+        width: 40%;
+        margin-top: 0;
+
+        .suggestion-budget {
+          display: block;
+          margin: 0rem;
+
+          & > p {
+            padding-left: 1.5rem;
+          }
+
+          .budget-tooltip {
+            &:after {
+              top: 25%;
+              left: 43%;
+            }
+          }
+        }
+
+        .category-name {
+          font-size: 0.9rem;
+        }
+
+        .suggestion-name {
+          width: 110%;
+        }  
+      }
+    }
+  }
+}
+
+
+@media screen and (min-width: 1024px) {
+  .suggestions {
+
+    .suggestions-title {
+      margin-bottom: 5rem;
+    }
+
+    .suggestions-wrapper {
+
+
+      .suggestion-container {
+        width: 35%;
+        margin: 3rem 2.5rem 5rem;
+
+        .suggestion-form {
+          top: -35%;
+  
+          .choose-suggestion-btn {
+            bottom: 22%;
+            left: 110%;
+          }
+        }
+
+        .suggestion-budget {
+          display: flex;
+
+        }
+
+        .suggestion-categories {
+          .category-name {
+            font-size: 1.3rem;
+          }
+        }
+        .suggestion-name {
+          font-size: 1.3rem; 
+        }  
+      }
+    }
+  }
+}
+
+
+@media screen and (min-width: 1400px) {
+  .suggestions {
+    .suggestions-wrapper {
+      
+      .suggestion-container {
+        width: 25%;
+        margin: 3rem 3rem 8rem;
+
+        .suggestion-form {
+          top: -33%;
+
+        }
+        .suggestion-categories {
+          .category-name {
+            margin: .5rem 0.25rem;
+            font-size: 1.5rem;
+          }
+        }
+      }
+    }
+  }
+}
