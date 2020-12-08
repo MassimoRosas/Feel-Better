@@ -1,0 +1,142 @@
+easy_admin:
+  site_name: 'Feel Better'
+  entities:
+    # List the entity class name you want to manage
+    User:
+      class: App\Entity\User
+      list:
+        fields: [
+        'id', 
+        {property: 'email', label: 'E-mail'},
+        {property: 'lastname', label: 'Nom'},
+        {property: 'firstname', label: 'Prénom'},
+        {property: 'birthday', label: 'Date de naissance'},
+        {property: 'city', label: 'Ville'},
+        {property: 'roles', label: 'Rôles'},
+        {property: 'created_at', label: 'Créé le'},
+        {property: 'updated_at', label: 'Modifié le'}
+        ]
+      form:
+        fields: [
+        {property: 'email', label: 'E-mail'},
+        {property: 'lastname', label: 'Nom'},
+        {property: 'firstname', label: 'Prénom'},
+        {property: 'birthday', label: 'Date de naissance', type_options: { widget: 'single_text' }},
+        {property: 'city', label: 'Ville'},
+        {property: 'created_at', label: 'Date de création', type_options: { widget: 'single_text' }},
+        {property: 'updated_at', label: 'Date de modification', type_options: { widget: 'single_text' }}
+        ]
+      new:
+        title: 'Ajouter un utilisateur'
+      edit:
+        title: 'Modifier un utilisateur'
+    Mood:
+      class: App\Entity\Mood
+      list:
+        fields: [
+          {property: 'name_en', label: 'Nom anglais'},
+          {property: 'name_fr',label: 'Nom français'},
+          {property: 'created_at', label: 'Créé le'},
+          {property: 'updated_at', label: 'Modifié le'}
+
+        ]
+      form:
+        fields: [
+          {property: 'name_en', label: 'Nom anglais'},
+          {property: 'name_fr',label: 'Nom français'},
+          {property: 'created_at', label: 'Date de création', type_options: { widget: 'single_text' }},
+          {property: 'updated_at', label: 'Date de modification', type_options: { widget: 'single_text' }}
+        ]
+      new:
+        title: 'Ajouter une humeur'
+      edit:
+        title: 'Modifier une humeur'
+    Category:
+      class: App\Entity\Category
+      list:
+        fields: [
+          {property: 'name_en', label: 'Nom anglais'},
+          {property: 'name_fr',label: 'Nom français'},
+          {property: 'created_at', label: 'Créé le'},
+          {property: 'updated_at', label: 'Modifié le'}
+
+        ]
+      form:
+        fields: [
+          {property: 'name_en', label: 'Nom anglais'},
+          {property: 'name_fr',label: 'Nom français'},
+          {property: 'created_at', label: 'Date de création', type_options: { widget: 'single_text' }},
+          {property: 'updated_at', label: 'Date de modification', type_options: { widget: 'single_text' }}
+        ]
+      new:
+        title: 'Ajouter une catégorie'
+      edit:
+        title: 'Modifier une catégorie'
+    Idea:
+      class: App\Entity\Idea
+      list:
+        fields: [
+          'id',
+          {property: 'name', label: 'Nom'},
+          {property: 'picture',label: 'Nom de l''image'},
+          {property: 'estimation', label: 'Estimation du prix'},
+          {property: 'created_at', label: 'Créé le'},
+          {property: 'updated_at', label: 'Modifié le'}
+
+        ]
+      form:
+        fields: [
+          {property: 'name', label: 'Nom'},
+          {property: 'picture',label: 'Nom de l''image'},
+          {property: 'estimation', label: 'Estimation du prix'},
+          {property: 'created_at', label: 'Date de création', type_options: { widget: 'single_text' }},
+          {property: 'updated_at', label: 'Date de modification', type_options: { widget: 'single_text' }},
+          {property: 'categories', label: 'Catégories', type_options: { class: 'App\Entity\Category', expanded: true, multiple: true}}
+          {property: 'moods', label: 'Humeurs', type_options: { class: 'App\Entity\Mood', expanded: true, multiple: true}}
+        ]
+      new:
+        title: 'Ajouter une idée'
+      edit:
+        title: 'Modifier une idée'
+    Color:
+      class: App\Entity\Color
+      list:
+        fields: [
+          'id',
+          {property: 'name', label: 'Nom'},
+          {property: 'hexadecimal',label: 'Code Hexadécimal'},
+          {property: 'created_at', label: 'Crée le'},
+          {property: 'updated_at', label: 'Modifié le'}
+
+        ]
+      form:
+        fields: [
+          {property: 'name', label: 'Nom'},
+          {property: 'hexadecimal',label: 'Code Hexadécimal'},
+          {property: 'created_at', label: 'Date de création', type_options: { widget: 'single_text' }},
+          {property: 'updated_at', label: 'Date de modification', type_options: { widget: 'single_text' }},
+          {property: 'mood', label: 'Humeur', type_options: { class: 'App\Entity\Mood', multiple: false}}
+        ]
+      new:
+        title: 'Ajouter une couleur'
+      edit:
+        title: 'Modifier une couleur'
+
+  design:
+    brand_color: '#1ABC9C'
+    menu:
+      - label: 'Feel Better'
+        children:
+          - {entity: 'User', icon: 'users', label: 'Utilisateurs'}
+          - {entity: Mood, icon: 'thermometer', label: 'Humeurs'}
+          - {entity: Category, icon: 'folder', label: 'Catégories'}
+          - {entity: Idea, icon: 'lightbulb-o', label: 'Idées'}
+          - {entity: Color, icon: 'paint-brush', label: 'Couleurs'}
+
+    assets:
+      favicon: '/assets/backend/favicon.png'
+    
+  formats:
+    date: 'd/m/Y'
+    time: 'H:i'
+    datetime: 'd/m/Y'
