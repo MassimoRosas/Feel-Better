@@ -1,0 +1,5 @@
+easy_admin:
+  design:
+    menu:
+      - label: 'Feel Better'
+        icon: 'newspaper-o'

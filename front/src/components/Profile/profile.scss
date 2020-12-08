@@ -1,0 +1,227 @@
+@import 'src/styles/vars';
+@import 'src/styles/btn';
+
+.register-errors {
+  background-color: rgb(255, 0, 0, 0.5);
+  border-radius: 0.5rem;
+  padding: 0.5em;
+  margin: 0 auto;
+  margin-bottom: 1em;
+  width: 20em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  list-style: none;
+
+
+  .register-error {
+    padding: 0.5em;
+  }
+}
+
+.profile {
+  padding-top: 2rem;
+
+  .avatar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3rem;
+
+    .avatar-mood, .avatar-type {
+      outline: none;
+      border: none;
+      padding: 1rem;
+      margin: 0.5rem;
+      font-size: 1em;
+      text-align: center;
+      border-radius: .25em;
+      width: 95%;
+    }
+
+    .avatar-color {
+      margin-top: 2rem;
+      border: none;
+      outline: none;
+      width: 50%;
+      margin: 1rem 5rem;
+    }
+    
+    .profile-avatar {
+      display:inline-block;
+      width:200px;
+      height:200px;
+      background-image: linear-gradient(-225deg, #473B7B 0%, #3584A7 51%, #3584A7 100%);
+      border-radius:100%;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .profile-avatar-btn {
+      @include btn-style;
+      font-size: 1rem;
+      margin-top: 1.5rem;
+
+      &:before {
+        left: -8%;
+      }
+    }
+  }
+
+  .needed-content {
+    color: red;
+    position: absolute;
+    top: -2rem;
+    left: 0;
+  }
+
+  .profile-form {
+    width: 80%;
+    margin: 2rem auto;
+    position: relative;
+
+    .inputBox {
+      position: relative;
+
+      .profile-input {
+        border: none;
+        outline: none;
+        background: transparent;
+        margin-bottom: 2rem;
+        padding: 0.7rem 0;
+        font-size: 1.2rem;
+        width: 100%;
+        font-family: $dosis-font;
+      }
+
+      .profile-error {
+        background: rgba(#c02739, 0.6);
+        border-radius: 0.5rem;
+      }
+
+      .profile-label {
+        position: absolute;
+        top: -1.2rem;
+        left: 0;
+        padding: 0.6rem 0;
+        font-size: 1rem;
+        font-weight: 600;
+
+        .needed {
+          color: red;
+        }
+      }
+    }
+
+    .profile-submit-btn {
+      @include btn-style;
+      color: $light-main-color;
+
+      &:before {
+        left: -5%;
+        background-color: $light-main-color;
+      }
+    }
+  }
+
+}
+
+
+
+@media screen and (min-width: 768px) {
+  .success-profile {
+    position: inherit;
+    margin: 1rem auto;
+  }
+  .register-errors {
+    background-color: rgb(255, 0, 0, 0.5);
+    border-radius: 0.5rem;
+    padding: 0.5em;
+    margin: 0 auto;
+    margin-bottom: 1em;
+    width: 20em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    list-style: none;
+
+
+    .register-error {
+      padding: 0.5em;
+    }
+  }
+
+  .profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 82vh;
+
+    .needed-content {
+      color: red;
+      position: absolute;
+      top: -2.5rem;
+      left: 2rem;
+    }
+
+    .icone-container {
+      padding: 2rem 4rem;
+    }
+
+    .avatar-form {
+      width: 35%;
+    }
+
+    .profile-form {
+      padding: 0 2rem;
+      margin: 0;
+      position: relative;
+      width: 60%;
+
+      .inputs-container {
+        display: flex;
+        flex-wrap: wrap;
+
+        .inputBox {
+          margin-right: 1rem;
+          width: 40%;
+        }
+      }
+    }
+  }
+
+}
+
+@media screen and (min-width: 1024px) {
+
+  .avatar-form {
+    margin-right: 2rem;
+  
+    .avatar-container {     
+
+      .avatar-custom {
+        display: flex;
+  
+        & label {
+          margin: 0 1rem;
+        }
+  
+        .avatar-mood, .avatar-type {
+          margin: 1rem 0;
+          width: auto;
+        }
+    
+        .avatar-color {
+          width: 70%;
+          margin: 2rem 1rem;
+        }
+  
+      }
+    }
+  }
+
+}

@@ -1,0 +1,400 @@
+@import 'src/styles/vars';
+@import 'src/styles/btn';
+
+.mood {
+  /* overlay */
+  background-color: rgba(#7F8C8D, 0.8);
+  min-height: 100vh;
+  min-width: 100vw;
+  z-index: 10;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  .mood-error {
+    position: absolute;
+    background-color: rgb(255, 0, 0, 0.5);
+    padding: 1rem;
+    color: #fff;
+    top: 5%;
+    left: 15%;
+    z-index: 2;
+  }
+
+  .mood-form {
+    background-color: $light-main-color;
+    border-radius: $border-radius;
+    display: inline-block;
+    min-width: 95%;
+    max-height: 85%;
+    overflow: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1rem;
+    text-align: center;
+
+    .needed-content {
+      color: red;
+      display: block;
+      margin-top: 1rem;
+    }
+
+    .mood-wrapper {
+      text-align: center;
+
+      
+
+      .mood-title {
+        font-weight: 600;
+        font-family: $patrick-font;
+        font-size: 1.5rem;
+        margin: 1rem 0;
+
+        .needed {
+          color: red;
+        }
+      }
+
+      .mood-icons {
+        display: flex;
+        flex-wrap: wrap;
+        .mood-img {
+          margin: 0.6rem;
+          margin-bottom: 1rem;
+          position: relative;
+          width: 40%;
+
+          .mood-img-input {
+            display: none;
+          }
+
+          //Tooltip text container 
+          .mood-tooltip {
+            &::before {
+              position: absolute;
+              top: -4rem;
+              left: 0rem;
+              background-color: #2B222A;
+              border-radius: $border-radius;
+              color: #fff;
+              content: attr(aria-label); //This pulls in the text from the element with the tooltip
+              padding: 1rem;
+              transition: all 0.5s ease;
+              width: 100px;
+            }
+
+            //Tooltip arrow
+            &::after {
+              position: absolute;
+              top: -1rem;
+              left: 2.5rem;
+              border-left: 12px solid transparent;
+              border-right: 12px solid transparent;
+              border-top: 12px solid #2B222A;
+              content: " ";
+              font-size: 0;
+              line-height: 0;
+              margin-left: -0.3rem;
+              width: 0;
+            }
+
+              //Setting up the transition for the tooltip
+              &::before,
+              &::after {
+                color: #efefef;
+                font-size: 1rem;
+                opacity: 0;
+                pointer-events: none;
+                text-align: center;
+              }
+          }
+
+          .mood-icon {
+            width: 90%;
+          }
+
+          .mood-img-input[value=pessimistic] ~ .mood-icon {
+            width: 110%;
+          }
+
+          &:hover {
+            transform: scale(1.2);
+            .mood-tooltip {
+              //Triggering the transition
+              &:before, &:after {
+                opacity: 1;
+                transition: all 0.75s ease;
+              }
+            } 
+          }
+
+          .mood-checked {
+            position: absolute;
+            bottom: -12%;
+            right: -7%;
+            background-color: #21bf73;
+            border-radius: 50%;
+            padding: 0.5rem;
+            display: none;
+
+            &:after {
+              content: '\f00c';
+              font-family: 'FontAwesome';
+              color: #fff;
+              font-size: 1.5rem;
+            }
+          }
+
+          // display span if input is checked
+          .mood-img-input:checked ~ .mood-checked {
+            display: block;
+          }
+        }
+      }
+    }
+
+    .stars {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+   
+    input.star{
+      display: none;
+    }
+    
+    .star {
+      padding: 0.6rem;
+      font-size: 1.5rem;
+      color: #444;
+      transition: all .2s;
+      float: right;
+    }
+
+    
+    input.star:checked ~ label.star:before {
+      content:'\f005';
+      color: #eeb140;
+      transition: all .25s;
+    }
+    
+    input.star-3:checked ~ label.star:before {
+      color:#F62;
+      text-shadow: 0 0 20px #952;
+    }
+    
+    input.star-1:checked ~ label.star:before {
+      color: #FE7;
+    }
+    
+    label.star:hover{
+      transform: rotate(-5deg) scale(1.2);
+    }
+    
+    label.star:before{
+      content:'\f006';
+      font-family: FontAwesome;
+      font-size: 2.2rem;
+    }
+
+    .submit-button {
+      @include btn-style;
+      width: fit-content;
+      background-color: transparent;
+
+      &:hover {
+        color: #f8f8f8;
+      }
+    }
+    
+  }
+
+  .mood-close {
+    position: absolute;
+    background-color: black;
+    top: 8%;
+    right: 4%;
+    height: 30px;
+    width: 30px;
+    border: none;
+    border-radius: 2em;
+
+    .fa-times {
+      color: #fff;
+      font-size: 1.2rem;
+    }
+  }
+}
+
+@media screen and (min-width:768px) {
+  .mood {
+    .mood-error {
+      left: 37%;
+    }
+    .mood-form {
+      .mood-wrapper {
+        .stars {
+          display: flex;
+          flex-direction: row-reverse;
+          justify-content: center;
+        }
+
+        .mood-icons {
+          .mood-img {
+            width: 30%;
+
+            .mood-tooltip {
+
+              &:before {
+                top: -3rem;
+                left: 3rem;
+              }
+
+              &:after {
+                top: -2px;
+                left: 5.5rem;            
+              }
+            }
+            .mood-icon {
+              width: 60%;
+            }
+
+
+            .mood-img-input[value=pessimistic] ~ .mood-icon {
+              width: 70%;
+            }
+
+            .mood-checked {
+              bottom: 0rem;
+              right: 2rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@media screen and (min-width:1024px) {
+  .mood {
+    .mood-form {
+      .mood-wrapper {
+        .mood-icons {
+          .mood-img {
+            margin: 0;
+            margin-bottom: 2rem;
+            width: 20%;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@media screen and (min-width:1440px) {
+  .mood {
+    .mood-error {
+      left: 43%;
+    }
+    .mood-form {
+      .mood-wrapper {
+        .mood-icons {
+          justify-content: center;
+
+          .mood-img {
+            width: 15%;
+
+            .mood-tooltip {
+
+              &:before {
+                left: 3rem;
+              }
+
+              &:after {
+                top: -2px;
+                left: 6rem;
+              }
+            }
+            .mood-icon {
+              width: 50%;
+            }
+
+            .mood-img-input[value=pessimistic] ~ .mood-icon {
+              width: 60%;
+            }
+
+            .mood-checked {
+              right: 2rem;
+
+              &:after {
+                font-size: 1.2rem;
+              }
+            }
+          }
+        }
+
+      }
+    }
+
+    .mood-close {
+      position: absolute;
+      background-color: black;
+      top: 15%;
+      right: 3%;
+      height: 30px;
+      width: 30px;
+      border: none;
+      border-radius: 2em;
+  
+      .fa-times {
+        color: #fff;
+        font-size: 1.2rem;
+      }
+    }
+    
+  }
+}
+
+@media screen and (min-width:1900px) {
+  .mood {
+    .mood-error {
+      left: 46%;
+    }
+    .mood-form {
+      .mood-wrapper {
+        .mood-icons {
+          .mood-img {
+            .mood-tooltip {
+              
+              &:before {
+                left: 7rem;
+              }
+
+              &:after {
+                left: 10rem;
+              }
+            }
+            .mood-icon {
+              width: 40%;
+            }
+
+            .mood-img-input[value=pessimistic] ~ .mood-icon {
+              width: 50%;
+            }
+
+            .mood-checked {
+              right: 6rem;
+
+            }
+          }
+        }
+
+      }
+    }
+  }
+}

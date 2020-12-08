@@ -1,0 +1,41 @@
+@use 'sass:color';
+
+/* Hamburger bar height */
+$bar-height: 13.5px;
+
+/* Fonts */
+$dosis-font: 'Dosis', sans-serif;
+$patrick-font: 'Patrick Hand', sans-serif;
+
+/* Global */
+$border-radius: 0.5rem;
+$link-padding: 0.15rem;
+
+
+/*  Light theme */
+
+$light-main-color: #f8f8f8;
+$light-text: #000;
+
+// Gradient for background
+$light-gradient-1: #d5d4d0; 
+$light-gradient-2: #eeeeec;
+$light-gradient-3: #f8f8f8;
+$light-gradient-4: #fffff9;
+
+$footer-light: color.scale($light-main-color, $lightness: -10%);
+
+$light-default-color: #8590BD;
+$light-default-hover: color.scale($light-default-color, $lightness: 55%);
+$label: color.scale($light-default-color, $lightness: 40%);
+
+
+/*  Dark theme */
+$dark-text: #f8f8f8;
+
+// Loader
+$first-dot: color.scale($light-default-color, $lightness: 60%);
+$second-dot: color.scale($light-default-color, $lightness: 20%);
+$third-dot: color.scale($light-default-color, $lightness: 10%);
+$fourth-dot: color.scale($light-default-color, $lightness: -30%);
+$fifth-dot: color.scale($light-default-color, $lightness: -60%);

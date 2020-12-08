@@ -1,0 +1,269 @@
+@import 'src/styles/vars';
+
+.calendar {
+  
+  // Whole calendar style
+  .react-calendar {
+    // color of day name (Lun, Mar etc...)
+    border: none;
+    color: #fff;
+    width: 100%;
+    background: transparent;
+
+    .react-calendar__navigation {
+      border: none;
+
+      .react-calendar__navigation__label {   
+        border: none;
+             
+        &:hover {
+          background: rgba(0, 0, 0, 0.3);
+        }
+      }
+      
+      .react-calendar__navigation__arrow {
+        border: none;
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.3);
+        }
+      }
+    }
+
+    // Disabled tile & navigation arrow style
+    .react-calendar__tile:disabled, .react-calendar__navigation__arrow:disabled {
+      // background: #383a56;
+      color: gray;
+      cursor: not-allowed;
+    }
+
+    // Navigation and all tiles color
+    .react-calendar__navigation > *, .react-calendar__tile {
+      background: inherit;
+    }
+    // Previous or next month days color
+    .react-calendar__month-view__days__day--neighboringMonth {
+      color: gray;
+    }  
+
+    // Current day tile color
+    .react-calendar__tile--now {
+      background-color: rgba(#ccc, 0.4);
+    }
+
+    // All tiles height
+    .react-calendar__tile {
+      height: 79px;
+    }
+
+    // Week-end days color
+    .react-calendar__month-view__days__day--weekend {
+      color: #fff;
+    }
+
+
+    // Tiles with a particular mood style
+    .calendar-mood--active {
+      background: rgba(#971f2d, 0.8);
+      & > img {
+        display: block;
+        width: 100%;
+        margin: auto;
+        margin-top: 0.5rem;
+      }
+    }
+
+    .react-calendar__tile--now {
+      box-shadow: inset 0 0 10px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    // Adjust image size on month view tiles
+    .react-calendar__year-view__months__month {
+      height: 100px;
+      & > img {
+        display: block;
+        width: 50%;
+        margin: auto;
+        margin-top: 0.5rem;
+      }
+
+    }
+    // Empty tile style (if user has no mood)
+    .empty-tile {
+      width: 32px;
+      height: 40px;
+      margin-top: 0.5rem;
+    }
+
+  }
+
+  .calendar-current-mood {
+    padding: 1rem;
+
+    .calendar-current-mood-container {
+      margin: 2rem auto 4rem;
+
+      width: 85%; 
+      height: 70px; 
+      border-radius: 0.5rem;
+      box-shadow: 15px -15px 10px rgb(0, 0, 0, 0.2);
+      background: transparent;
+      transform: skew(20deg); 
+      -webkit-transform: skew(0deg);
+      position: relative;
+      text-align: center;
+      padding: 1rem 0 1rem 2rem;
+      font-size: 1.2rem;
+      font-family: $patrick-font;
+
+      .calendar-current-mood-name {
+        margin-left: 1rem;
+        transform: skew(-20deg); 
+        -webkit-transform: skew(0deg);
+        max-width: 180px;
+      }
+
+      .calendar-current-mood-img {
+        // width: 10%;
+        width: 30%;
+        position: absolute;
+        transform: skew(-20deg);
+        -webkit-transform: skew(-0deg);
+        background: #fff;
+        border-radius: 50%;
+        top: -25%;
+        left: -12%;
+        padding: 0.2rem;
+      }
+    }
+
+    
+  }
+}
+
+@media screen and (min-width: 425px) {
+  .calendar {
+    padding-top: 1rem;
+
+    .react-calendar {
+      .react-calendar__tile {
+        height: 90px;
+      }
+
+      .calendar-mood--active {
+        & > img {
+          width: 60%;
+        }
+      }
+    }
+    .calendar-current-mood {
+      .calendar-current-mood-container {
+        .calendar-current-mood-name {
+          margin-top: 0.3rem; 
+          max-width: 280px;
+        }
+  
+        .calendar-current-mood-img {
+          width: 25%;
+          top: -40%;
+        }
+      }
+      
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .calendar {
+    .react-calendar {
+      width: 90%;
+      margin: auto;
+
+      .react-calendar__tile {
+        height: 100px;
+      }
+    }
+
+    .calendar-current-mood {
+      margin: 0 1rem;
+
+      .calendar-current-mood-container {
+        width: 50%;
+
+        .calendar-current-mood-img {
+          width: 30%;
+          top: -28%;
+        }
+      }
+      
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .calendar {
+    min-height: 90vh;
+    display: flex;
+
+    .react-calendar {
+      width: 50%;
+      margin-left: 1rem;
+      margin-right: 0;
+    }
+
+    .calendar-current-mood {
+      margin: 0 1rem;
+      margin-top: 8rem;
+      width: 50%;
+      max-height: 700px;
+      overflow: auto;
+
+      .calendar-current-mood-container {
+        width: 75%;
+      }
+      
+    }
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .calendar {
+    .react-calendar {
+      .calendar-mood--active {
+        & > img {
+          width: 50%;
+        }
+      }
+    }
+
+    .calendar-current-mood {
+
+      .calendar-current-mood-container {
+        width: 50%;
+      }
+      
+    }
+  }
+}
+
+@media screen and (min-width: 1900px) {
+  .calendar {
+    .react-calendar {
+      .react-calendar__tile {
+        height: 120px;
+      }
+    }
+
+    .calendar-current-mood {
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+
+      .calendar-current-mood-container {
+        width: 30%;
+      }      
+    }
+  }
+}
+
